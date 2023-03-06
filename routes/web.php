@@ -18,4 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/showallusers',function(){
+   return "show all users";
+});
+
 Route::resource('mountains', MountainController::class);

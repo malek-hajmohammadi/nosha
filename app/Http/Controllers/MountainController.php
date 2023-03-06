@@ -57,7 +57,7 @@ class MountainController extends Controller
     {
         $mountain=Mountain::find($id);
 
-        return view('mountains.show',compact('item'));
+        return view('mountains.show',compact('mountain'));
     }
 
     /**
@@ -70,7 +70,7 @@ class MountainController extends Controller
     {
         $mountain=Mountain::find($id);
 
-        return view('mountains.edit',compact(''));
+        return view('mountains.edit',compact('mountain'));
     }
 
     /**
@@ -82,7 +82,14 @@ class MountainController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mountain=Mountain::find($id);
+
+        $mountain->name=$request->input('name');
+        $mountain->description=$request->input('description');
+
+        $mountain->save();
+
+        return redirect()->route('mountains.index');
     }
 
     /**
@@ -93,6 +100,10 @@ class MountainController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mountain=Mountain::find($id);
+
+        $mountain->delete();
+
+        return redirect()->route('mountains.index');
     }
 }
